@@ -1,0 +1,24 @@
+brew services start zookeeper
+
+brew services start kafka
+
+--Vemos todos los topics
+
+kafka-topics --bootstrap-server localhost:9092 --list 
+
+--Eliminar un topic
+
+kafka-topics --bootstrap-server localhost:9092 --topic demo_java --delete
+
+# Ver los consumer groups
+kafka-consumer-groups --bootstrap-server localhost:9092 --list
+
+#Vid 45
+
+--Primero creamos el topic
+ 
+kafka-topics --bootstrap-server localhost:9092 --topic demo_java --create --partitions 3 --replication-factor 1
+
+--Vemos el topic que creamos
+kafka-console-consumer --bootstrap-server localhost:9092 --topic demo_java --from-beginning
+echo $PATH
