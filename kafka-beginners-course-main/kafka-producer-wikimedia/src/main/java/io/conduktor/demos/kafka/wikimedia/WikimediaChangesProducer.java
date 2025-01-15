@@ -1,4 +1,4 @@
-package org.pjff.springcloud.msvc;
+package io.conduktor.demos.kafka.wikimedia;
 
 import com.launchdarkly.eventsource.EventHandler;
 import com.launchdarkly.eventsource.EventSource;
@@ -10,18 +10,15 @@ import java.net.URI;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-
-//Vid 59
 public class WikimediaChangesProducer {
 
     public static void main(String[] args) throws InterruptedException {
 
-        //create Producer properties
+        // create Producer Properties
         Properties properties = new Properties();
-        //esto es para localhost
-        properties.setProperty("bootstrap.servers", "127.0.0.1:9092");
-        properties.setProperty("key.serializer", StringSerializer.class.getName());
-        properties.setProperty("value.serializer", StringSerializer.class.getName());
+        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
+        properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
         // create the Producer
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
@@ -39,5 +36,7 @@ public class WikimediaChangesProducer {
 
         // we produce for 10 minutes and block the program until then
         TimeUnit.MINUTES.sleep(10);
+
+
     }
 }
